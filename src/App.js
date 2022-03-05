@@ -1,23 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from "react";
+import { Routes, Link, Route } from "react-router-dom";
+import { registerMicroApps, start } from "qiankun";
+import "./App.css";
 
+const Index = function () {
+  return <div>首页</div>;
+};
+const List = function (props) {
+  console.log(props);
+  return <div>列表页</div>;
+};
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="layout">
+      <div className="left">
+        <Link to="/index">首页</Link>
+        <Link to="/list">列表</Link>
+        <Link to="/sub/childindex">子应用首页</Link>
+      </div>
+      <div className="content" >
+        <Routes>
+          <Route path="/index" element={<Index />} />
+          <Route path="/list" element={<List />} />
+        </Routes>
+        <div id="child"></div>
+      </div>
     </div>
   );
 }
